@@ -1,5 +1,3 @@
-// /components/TokenFarm.js
-
 "use client";  // Это делает компонент клиентским
 
 import { useState, useEffect } from 'react';
@@ -11,7 +9,7 @@ export default function TokenFarm() {
   const [error, setError] = useState(null);
 
   const TOKENS_PER_FARM = 95.50;
-  const FARM_INTERVAL = 6 * 60 * 60 * 1000;
+  const FARM_INTERVAL = 6 * 60 * 60 * 1000; // 6 hours in milliseconds
 
   useEffect(() => {
     const storedTokens = parseFloat(localStorage.getItem('tokens')) || 0;
@@ -56,19 +54,25 @@ export default function TokenFarm() {
     return `${hours}h ${minutes}m ${seconds}s`;
   };
 
+  const progressPercentage = nextFarmTime
+    ? ((FARM_INTERVAL - timeLeft) / FARM_INTERVAL) * 100
+    : 0;
+
   return (
     <div>
       <p>Tokens farmed: {tokens.toFixed(2)}</p>
       <button
         onClick={startFarm}
-        style={styles.button}
+        style={{
+          ...styles.button,
+          background: timeLeft > 0
+            ? `linear-gradient(to left, #007bff ${progressPercentage}%, #e0e0e0 ${progressPercentage}%)`
+            : '#007bff'
+        }}
         disabled={timeLeft > 0}
       >
-        Start Farm
+        {timeLeft > 0 ? `Next farm available in: ${formatTimeLeft(timeLeft)}` : 'Start Farm'}
       </button>
-      {timeLeft > 0 && (
-        <p>Next farm available in: {formatTimeLeft(timeLeft)}</p>
-      )}
       {error && <p style={styles.error}>{error}</p>}
     </div>
   );
@@ -78,11 +82,13 @@ const styles = {
   button: {
     padding: '10px 20px',
     fontSize: '16px',
-    backgroundColor: '#007bff',
     color: '#fff',
     border: 'none',
     borderRadius: '5px',
     cursor: 'pointer',
+    transition: 'background 0.5s ease',
+    width: '300px', // Adjust width as needed
+    textAlign: 'center',
   },
   error: {
     color: 'red',
