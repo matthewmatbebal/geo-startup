@@ -9,15 +9,28 @@ export default function Home() {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    if (typeof window !== 'undefined' && window.Telegram?.WebApp) {
-      const telegramUser = window.Telegram.WebApp.initDataUnsafe?.user;
-      if (telegramUser) {
-        setUser({
-          username: telegramUser.username || 'User',
-          photoUrl: telegramUser.photo_url || null,
-        });
+    // Подключение скрипта Telegram Web App
+    const script = document.createElement('script');
+    script.src = "https://telegram.org/js/telegram-web-app.js";
+    script.async = true;
+    document.body.appendChild(script);
+
+    script.onload = () => {
+      if (typeof window !== 'undefined' && window.Telegram?.WebApp) {
+        const telegramUser = window.Telegram.WebApp.initDataUnsafe?.user;
+        if (telegramUser) {
+          setUser({
+            username: telegramUser.username || 'User',
+            photoUrl: telegramUser.photo_url || null,
+          });
+        }
       }
-    }
+    };
+
+    return () => {
+      // Удаление скрипта при размонтировании компонента
+      document.body.removeChild(script);
+    };
   }, []);
 
   return (
