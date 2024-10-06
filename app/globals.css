@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -5,8 +8,8 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: white;
+    --foreground: #171717;
   }
 }
 
@@ -14,12 +17,14 @@ html,
 body {
   max-width: 100vw;
   overflow-x: hidden;
+  font-family: "Lato";
+  margin-left: 1.5em;
+  margin-right: 1.5em;
 }
 
 body {
   color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  background: #e0ffff;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -39,4 +44,52 @@ a {
   html {
     color-scheme: dark;
   }
+}
+
+
+.username {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.user-wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.7em;
+}
+
+.user-tg-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.header-wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.settings {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+
+
+.farming {
+  margin-top:  4em;
+}
+
+
+.tokens-counter {
+  font-size: 44px;
+  font-weight: 700;
+  margin-bottom: 2em;
 }

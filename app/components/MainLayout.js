@@ -9,6 +9,6 @@ export default function MainLayout({ children }) {
   const styles = {
     container: {
       textAlign: 'center',
-      marginTop: '50px',
+      marginTop: '24px',
     },
   };

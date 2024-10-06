@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import MainLayout from "./components/MainLayout";
 import UserProfile from "./components/UserProfile";
 import TokenFarm from "./components/TokenFarm";
+import Footer from "./components/Footer";
 
 export default function Home() {
   const [user, setUser] = useState(null);
@@ -43,6 +44,8 @@ export default function Home() {
       ) : (
         <p>Loading...</p>
       )}
+      <Footer></Footer>
     </MainLayout>
+    
   );
 }
